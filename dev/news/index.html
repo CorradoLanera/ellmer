@@ -50,6 +50,8 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ellmer-development-version">ellmer (development version)<a class="anchor" aria-label="anchor" href="#ellmer-development-version"></a></h2>
 <ul><li><p>All providers now allow for up to 60s for the underlying curl connection phase, alongside the existing 60s timeout. Some providers are known to time out on complex queries early otherwise. You can increase this with, e.g., <code>option(ellmer_connecttimeout_s = 5 * 60)</code> (<a href="https://github.com/tidyverse/ellmer/issues/318" class="external-link">#318</a>, <a href="https://github.com/CorradoLanera" class="external-link">@CorradoLanera</a>).</p></li>
+<li><p><code><a href="../reference/chat_portkey.html">chat_portkey()</a></code> works once again, and now will read the virtual API key from the <code>PORTKEY_VIRTUAL_KEY</code> env var (<a href="https://github.com/tidyverse/ellmer/issues/588" class="external-link">#588</a>).</p></li>
+<li><p><code><a href="../reference/chat_github.html">models_github()</a></code> lists models for <code><a href="../reference/chat_github.html">chat_github()</a></code> (<a href="https://github.com/tidyverse/ellmer/issues/561" class="external-link">#561</a>).</p></li>
 <li><p><code><a href="../reference/chat_snowflake.html">chat_snowflake()</a></code> now works with tool calling (<a href="https://github.com/tidyverse/ellmer/issues/557" class="external-link">#557</a>, <a href="https://github.com/atheriel" class="external-link">@atheriel</a>).</p></li>
 </ul></div>
     <div class="section level2">
