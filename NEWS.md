@@ -5,6 +5,9 @@
   out on complex queries early otherwise. You can increase this with, e.g.,
   `option(ellmer_connecttimeout_s = 5 * 60)` (#318, @CorradoLanera).
 
+* `chat_portkey()` works once again, and now will read the virtual API key 
+  from the `PORTKEY_VIRTUAL_KEY` env var (#588).
+* `models_github()` lists models for `chat_github()` (#561).
 * `chat_snowflake()` now works with tool calling (#557, @atheriel).
 
 # ellmer 0.2.1

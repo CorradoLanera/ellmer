@@ -71,7 +71,7 @@ check_echo <- function(echo = NULL) {
   }
 
   if (is.null(echo) || identical(echo, c("none", "output", "all"))) {
-    if (env_is_user_facing(parent.frame(2)) && !is_testing()) {
+    if (env_is_user_facing(parent.frame(2))) {
       "output"
     } else {
       "none"
@@ -225,4 +225,13 @@ base64_enc <- function(path, raw) {
     raw <- readBin(path, "raw", file.info(path)$size)
   }
   gsub("\n", "", openssl::base64_encode(raw), fixed = TRUE)
+}
+
+ellmer_output <- function(x) {
+  structure(x, class = "ellmer_output")
+}
+#' @export
+print.ellmer_output <- function(x, ...) {
+  cat_line(x)
+  invisible(x)
 }

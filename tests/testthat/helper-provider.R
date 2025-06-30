@@ -22,7 +22,7 @@ retry_test <- function(code, retries = 1) {
 test_params_stop <- function(chat_fun) {
   chat <- chat_fun(params = params(stop_sequences = "cool"))
   out <- chat$chat("Repeat after the following phrase: Dogs are cool")
-  expect_equal(out, "Dogs are ")
+  expect_equal(out, ellmer_output("Dogs are "))
 }
 
 # Tool calls -------------------------------------------------------------
@@ -50,7 +50,7 @@ test_tools_simple <- function(chat_fun) {
 }
 
 test_tools_async <- function(chat_fun) {
-  chat <- chat_fun(system_prompt = "Be very terse, not even punctuation.")
+  chat <- chat_fun("Be very terse, not even punctuation.")
   chat$register_tool(tool(
     coro::async(function() "2024-01-01"),
     "Return the current date"
@@ -59,11 +59,8 @@ test_tools_async <- function(chat_fun) {
   result <- sync(chat$chat_async("What's the current date in Y-M-D format?"))
   expect_match(result, "2024-01-01")
 
-  expect_snapshot(
-    chat$chat("Great. Do it again."),
-    error = TRUE,
-    transform = function(value) gsub(" \\(\\w+_[a-z0-9A-Z]+\\)", " (ID)", value)
-  )
+  # Can't use async tools in sync context
+  expect_error(chat$chat("Great. Do it again."), class = "tool_async_error")
 }
 
 test_tools_parallel <- function(chat_fun, total_calls = 4) {
